@@ -30,7 +30,10 @@ import Card from '../components/Card.astro';
 					body="Don't hesitate, I'm always here for you 🫡"
 				/>
 			</ul>
+			<p>🎉 Woohoo! This page has been discovered <span id="visitCount">0</span> times! 🚀</p>
+
 		</main>
+		
 	</div>
 	
 </Layout>
@@ -119,3 +122,21 @@ import Card from '../components/Card.astro';
 	}
 	
 </style>
+<script>
+// Retrieve current visit count from local storage or initialize it if it doesn't exist
+let visitCount = localStorage.getItem('visitCount');
+if (!visitCount) {
+    visitCount = 0;
+}
+visitCount = parseInt(visitCount);
+
+// Increment visit count
+visitCount++;
+
+// Update visit count on the page
+document.getElementById('visitCount').textContent = visitCount;
+
+// Store updated visit count in local storage
+localStorage.setItem('visitCount', visitCount);
+
+</script>
