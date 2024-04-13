@@ -1,72 +1,71 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import Z from '../components/Z.astro';
 import GalleryItem from '../components/GalleryItem.astro';
-import notet from '../components/notet.png';
-const images = [
-"Amine.jpeg",
-    "barcha-abed.jpeg",
-    "bdan.jpeg",
-    "beach.jpeg",
-    "big-support.jpeg",
-    "Bobo.3.jpeg",
-    "Bobo.jpeg",
-    "Cat-in-white.jpeg",
-    "Cat-sun.jpeg",
-    "Chedi.jpeg",
-    "Chikh.jpeg",
-    "coding-peace.jpeg",
-    "competition.2.jpeg",
-    "competition.jpeg",
-    "cute-bobo.jpeg",
-    "eeg.jpg",
-    "fam.jpeg",
-    "Fawzi-behmann.2.jpeg",
-    "Fawzi-behmann.jpeg",
-    "GYM.jpeg",
-    "Hachathon.2.png",
-    "Hackathon.jpeg",
-    "jame3.jpeg",
-    "Kahwa.jpeg",
-    "Lora.jpeg",
-    "menty.jpeg",
-    "mommy.jpeg",
-    "Mr-ouled-hassan.jpeg",
-    "Nihed.jpeg",
-    "Nihed2.png",
-    "no-sleep.jpeg",
-    "Nouha-Nihed.jpeg",
-    "Nouha.2.jpeg",
-    "Nouha.jpeg",
-    "Nounou.jpeg",
-    "old-me.jpeg",
-    "oldsmatech.jpeg",
-    "Omar.jpeg",
-    "onetech-microbe.jpeg",
-    "Orange-flower.jpeg",
-    "Pres.jpeg",
-    "Radio.png",
-    "Ramadan.jpeg",
-    "raspberry.jpeg",
-    "red-flower.jpeg",
-    "robotics.jpeg",
-    "robotts.jpeg",
-    "Sami.jpeg",
-    "Sdrive.jpeg",
-    "sidibou.jpeg",
-    "sister.jpeg",
-    "smartech.2.jpeg",
-    "Smartech.jpeg",
-    "stand.2.jpeg",
-    "Stand.jpeg",
-    "Sunset.jpeg",
-    "sunshine.jpeg",
-    "white-cat-cat.jpeg",
-    "white-flower.2.jpeg",
-    "White-flower.jpeg",
-    "White.jpeg"
-];
+import theme from '../components/THE_IMG.jpeg';
+import Amine from '../images/Amine.jpeg';
+import BarchaAbed from '../images/barcha-abed.jpeg';
+import Bdan from '../images/bdan.jpeg';
+import Beach from '../images/beach.jpeg';
+import BigSupport from '../images/big-support.jpeg';
+import Bobo3 from '../images/Bobo.3.jpeg';
+import Bobo from '../images/Bobo.jpeg';
+import CatInWhite from '../images/Cat-in-white.jpeg';
+import CatSun from '../images/Cat-sun.jpeg';
+import Chedi from '../images/Chedi.jpeg';
+import Chikh from '../images/Chikh.jpeg';
+import CodingPeace from '../images/coding-peace.jpeg';
+import Competition2 from '../images/competition.2.jpeg';
+import Competition from '../images/competition.jpeg';
+import CuteBobo from '../images/cute-bobo.jpeg';
+import Eeg from '../images/eeg.jpg';
+import Fam from '../images/fam.jpeg';
+import FawziBehmann2 from '../images/Fawzi-behmann.2.jpeg';
+import FawziBehmann from '../images/Fawzi-behmann.jpeg';
+import Gym from '../images/GYM.jpeg';
+import Hachathon2 from '../images/Hachathon.2.png';
+import Hackathon from '../images/Hackathon.jpeg';
+import Jame3 from '../images/jame3.jpeg';
+import Kahwa from '../images/Kahwa.jpeg';
+import Lora from '../images/Lora.jpeg';
+import Menty from '../images/menty.jpeg';
+import Mommy from '../images/mommy.jpeg';
+import MrOuledHassan from '../images/Mr-ouled-hassan.jpeg';
+import Nihed from '../images/Nihed.jpeg';
+import Nihed2 from '../images/Nihed2.png';
+import NoSleep from '../images/no-sleep.jpeg';
+import NouhaNihed from '../images/Nouha-Nihed.jpeg';
+import Nouha2 from '../images/Nouha.2.jpeg';
+import Nouha from '../images/Nouha.jpeg';
+import Nounou from '../images/Nounou.jpeg';
+import OldMe from '../images/old-me.jpeg';
+import Oldsmatech from '../images/oldsmatech.jpeg';
+import Omar from '../images/Omar.jpeg';
+import OnetechMicrobe from '../images/onetech-microbe.jpeg';
+import OrangeFlower from '../images/Orange-flower.jpeg';
+import Pres from '../images/Pres.jpeg';
+import Radio from '../images/Radio.png';
+import Ramadan from '../images/Ramadan.jpeg';
+import Raspberry from '../images/raspberry.jpeg';
+import RedFlower from '../images/red-flower.jpeg';
+import Robotics from '../images/robotics.jpeg';
+import Robotts from '../images/robotts.jpeg';
+import Sami from '../images/Sami.jpeg';
+import Sdrive from '../images/Sdrive.jpeg';
+import Sidibou from '../images/sidibou.jpeg';
+import Sister from '../images/sister.jpeg';
+import Smartech2 from '../images/smartech.2.jpeg';
+import Smartech from '../images/Smartech.jpeg';
+import Stand2 from '../images/stand.2.jpeg';
+import Stand from '../images/Stand.jpeg';
+import Sunset from '../images/Sunset.jpeg';
+import Sunshine from '../images/sunshine.jpeg';
+import WhiteCatCat from '../images/white-cat-cat.jpeg';
+import WhiteFlower2 from '../images/white-flower.2.jpeg';
+import WhiteFlower from '../images/White-flower.jpeg';
+import White from '../images/White.jpeg';
+
+
 ---
 
 <head>
@@ -77,21 +76,259 @@ const images = [
     <main class="gallery">
      
         <GalleryItem 
-            src="/src/components/THE_IMG.jpeg"
+            src={theme}
             alt="Photo 1"
         />
         <GalleryItem 
-        src={notet}
-        alt="Photo 62"
-    />
-       
-        {images.map((image, index) => (
+            src={Amine}
+            alt="Photo 2"
+        />
+        <GalleryItem 
+            src={BarchaAbed}
+            alt="Photo 3"
+        />
+        <GalleryItem 
+            src={Bdan}
+            alt="Photo 4"
+        />
+        <GalleryItem 
+            src={Beach}
+            alt="Photo 5"
+        />
+        <GalleryItem 
+            src={BigSupport}
+            alt="Photo 6"
+        />
+        <GalleryItem 
+            src={Bobo3}
+            alt="Photo 7"
+        />
+        <GalleryItem 
+            src={Bobo}
+            alt="Photo 8"
+        />
+        <GalleryItem 
+            src={CatInWhite}
+            alt="Photo 9"
+        />
+        <GalleryItem 
+            src={CatSun}
+            alt="Photo 10"
+        />
+        <GalleryItem 
+            src={Chedi}
+            alt="Photo 11"
+        />
             <GalleryItem 
-                src={`/src/images/${image}`}
-                alt={`Photo ${index + 1}`}
+                src={Chikh}
+                alt="Photo 12"
             />
-        ))}
-       
+            <GalleryItem 
+                src={CodingPeace}
+                alt="Photo 13"
+            />
+            <GalleryItem 
+                src={Competition2}
+                alt="Photo 14"
+            />
+            <GalleryItem 
+                src={Competition}
+                alt="Photo 15"
+            />
+            <GalleryItem 
+                src={CuteBobo}
+                alt="Photo 16"
+            />
+            <GalleryItem 
+                src={Eeg}
+                alt="Photo 17"
+            />
+            <GalleryItem 
+                src={Fam}
+                alt="Photo 18"
+            />
+            <GalleryItem 
+                src={FawziBehmann2}
+                alt="Photo 19"
+            />
+            <GalleryItem 
+                src={FawziBehmann}
+                alt="Photo 20"
+            />
+            <GalleryItem 
+                src={Gym}
+                alt="Photo 21"
+            />
+            <GalleryItem 
+                src={Hachathon2}
+                alt="Photo 22"
+            />
+            <GalleryItem 
+                src={Hackathon}
+                alt="Photo 23"
+            />
+            <GalleryItem 
+                src={Jame3}
+                alt="Photo 24"
+            />
+            <GalleryItem 
+                src={Kahwa}
+                alt="Photo 25"
+            />      
+            <GalleryItem 
+                src={Lora}
+                alt="Photo 26"
+            />
+            <GalleryItem 
+                src={Menty}
+                alt="Photo 27"
+            />
+            <GalleryItem 
+                src={Mommy}
+                alt="Photo 28"
+            />
+            <GalleryItem 
+                src={MrOuledHassan}
+                alt="Photo 29"
+            />
+            <GalleryItem 
+                src={Nihed}
+                alt="Photo 30"
+            />
+            <GalleryItem 
+                src={Nihed2}
+                alt="Photo 31"
+            />
+            <GalleryItem 
+                src={NoSleep}
+                alt="Photo 32"
+            />
+            <GalleryItem 
+                src={NouhaNihed}
+                alt="Photo 33"
+            />
+
+
+            <GalleryItem 
+                src={Nouha2}
+                alt="Photo 34"
+            />
+            <GalleryItem 
+                src={Nouha}
+                alt="Photo 35"
+            />
+            <GalleryItem 
+                src={Nounou}
+                alt="Photo 36"
+            />
+            <GalleryItem 
+                src={OldMe}
+                alt="Photo 37"
+            />
+            <GalleryItem 
+                src={Oldsmatech}
+                alt="Photo 38"
+            />
+            <GalleryItem 
+                src={Omar}
+                alt="Photo 39"
+            />
+            <GalleryItem 
+                src={OnetechMicrobe}
+                alt="Photo 40"
+            />
+            <GalleryItem 
+                src={OrangeFlower}
+                alt="Photo 41"
+            />
+            <GalleryItem 
+                src={Pres}
+                alt="Photo 42"
+            />
+            <GalleryItem 
+                src={Radio}
+                alt="Photo 43"
+            />
+            <GalleryItem 
+                src={Ramadan}
+                alt="Photo 44"
+            />
+            <GalleryItem 
+                src={Raspberry}
+                alt="Photo 45"
+            />
+            <GalleryItem 
+                src={RedFlower}
+                alt="Photo 46"
+            />
+            <GalleryItem 
+                src={Robotics}
+                alt="Photo 47"
+            />
+            <GalleryItem 
+                src={Robotts}
+                alt="Photo 48"
+            />
+            <GalleryItem 
+                src={Sami}
+                alt="Photo 49"
+            />
+            <GalleryItem 
+                src={Sdrive}
+                alt="Photo 50"
+            />
+            <GalleryItem 
+                src={Sidibou}
+                alt="Photo 51"
+            />
+            <GalleryItem 
+                src={Sister}
+                alt="Photo 52"
+            />
+            <GalleryItem 
+                src={Smartech2}
+                alt="Photo 53"
+            />
+            <GalleryItem 
+                src={Smartech}
+                alt="Photo 54"
+            />
+            <GalleryItem 
+                src={Stand2}
+                alt="Photo 55"
+            />
+            <GalleryItem 
+                src={Stand}
+                alt="Photo 56"
+            />
+
+            <GalleryItem 
+                src={Sunset}
+                alt="Photo 57"
+            />
+            <GalleryItem 
+                src={Sunshine}
+                alt="Photo 58"
+            />
+            <GalleryItem 
+                src={WhiteCatCat}
+                alt="Photo 59"
+            />
+            <GalleryItem 
+                src={WhiteFlower2}
+                alt="Photo 60"
+            />
+            <GalleryItem 
+                src={WhiteFlower}
+                alt="Photo 61"
+            />
+            <GalleryItem 
+                src={White}
+                alt="Photo 62"
+            />  
+
+
+        
     </main>
     <ul id="home" class="link-card-grid"><Z
 		href="/"
