@@ -195,20 +195,22 @@ import Z from '../components/Z.astro';
   const stars = document.querySelectorAll('input[type="radio"]');
   const counter = document.querySelector('.counter');
   let count = localStorage.getItem('ratingCount') || 0; // Retrieve count from localStorage or initialize to 0
-
+  let hasRated = localStorage.getItem('hasRated') === 'true'; // Retrieve rated flag from localStorage
+  
   // Update the counter text initially
   counter.textContent = `${count} user${count !== 1 ? 's' : ''} rated 5 stars`;
 
   stars.forEach(star => {
     star.addEventListener('change', function() {
-      if (this.value === '5') {
+      if (!hasRated && this.value === '5') { // Check if the user hasn't rated and is rating 5 stars
         // Increment the counter
         count++;
         // Update the counter text
         counter.textContent = `${count} user${count !== 1 ? 's' : ''} rated 5 stars`;
 
-        // Save the count to localStorage
+        // Save the count and rated flag to localStorage
         localStorage.setItem('ratingCount', count);
+        localStorage.setItem('hasRated', true);
 
         // Trigger animation for 5-star rating
         const confettiContainer = document.createElement('div');
@@ -222,5 +224,6 @@ import Z from '../components/Z.astro';
     });
   });
 });
+
 
 </script>
