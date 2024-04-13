@@ -16,14 +16,19 @@ import Y from '../components/y.astro';
     </section>
     <section class="link-section">
       <div class="about-description-container">
-        <Y
+        <Y 
           body="💻 Innovative desktop app developer with a year of experience.\n\nPassionate about crafting user-friendly solutions that blend seamlessly into workflows. 👨‍💻\n\n🚀 Successfully created 3 apps for a top industry player.\n\n💡 Prioritize intuitive, efficient, and visually appealing designs.\n\n🌐 Full lifecycle expertise: requirement gathering, design, coding, testing, and deployment.\n\n🤝 Collaborative team player with a knack for translating complexity into elegant software.\n\n🔍 Always learning and adapting to stay on the cutting edge.\n\n🌟 Ready to tackle challenges and create impactful desktop apps!"
         />
       </div>
     </section>
-    <section class="link-section">
-      <h2 class="section-heading"><span class="text-gradient">Explore More</span></h2>
+    <section id="cv"  class="link-section">
       <ul class="link-card-grid"><Z
+        href="/mylife"
+        title="My Life"
+        body="sneek peak into my life"
+          /></ul>
+
+      <ul id="home" class="link-card-grid"><Z
 		href="/"
 		title="Home"
 		body="Go back to the home page"
@@ -33,6 +38,13 @@ import Y from '../components/y.astro';
 </Layout>
 
 <style>
+  .about-description-container {
+    border: 2px solid var(--accent);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    font-size: 1.2rem; /* Increase the font size */
+  }
   .text-gradient {
 		background-image: var(--accent-gradient);
 		-webkit-background-clip: text;
@@ -45,7 +57,10 @@ import Y from '../components/y.astro';
     padding: 2rem;
     max-width: 800px;
   }
-
+  #home {
+    margin-top: 2rem;
+  }
+ 
   .about-section {
     text-align: center;
     margin-bottom: 3rem;

@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Z from '../components/Z.astro';
+import GalleryItem from '../components/GalleryItem.astro';
+const images = [
+"Amine.jpeg",
+    "barcha-abed.jpeg",
+    "bdan.jpeg",
+    "beach.jpeg",
+    "big-support.jpeg",
+    "Bobo.3.jpeg",
+    "Bobo.jpeg",
+    "Cat-in-white.jpeg",
+    "Cat-sun.jpeg",
+    "Chedi.jpeg",
+    "Chikh.jpeg",
+    "coding-peace.jpeg",
+    "competition.2.jpeg",
+    "competition.jpeg",
+    "cute-bobo.jpeg",
+    "eeg.jpg",
+    "fam.jpeg",
+    "Fawzi-behmann.2.jpeg",
+    "Fawzi-behmann.jpeg",
+    "GYM.jpeg",
+    "Hachathon.2.png",
+    "Hackathon.jpeg",
+    "jame3.jpeg",
+    "Kahwa.jpeg",
+    "Lora.jpeg",
+    "menty.jpeg",
+    "mommy.jpeg",
+    "Mr-ouled-hassan.jpeg",
+    "Nihed.jpeg",
+    "Nihed2.png",
+    "no-sleep.jpeg",
+    "Nouha-Nihed.jpeg",
+    "Nouha.2.jpeg",
+    "Nouha.jpeg",
+    "Nounou.jpeg",
+    "old-me.jpeg",
+    "oldsmatech.jpeg",
+    "Omar.jpeg",
+    "onetech-microbe.jpeg",
+    "Orange-flower.jpeg",
+    "Pres.jpeg",
+    "Radio.png",
+    "Ramadan.jpeg",
+    "raspberry.jpeg",
+    "red-flower.jpeg",
+    "robotics.jpeg",
+    "robotts.jpeg",
+    "Sami.jpeg",
+    "Sdrive.jpeg",
+    "sidibou.jpeg",
+    "sister.jpeg",
+    "smartech.2.jpeg",
+    "Smartech.jpeg",
+    "stand.2.jpeg",
+    "Stand.jpeg",
+    "Sunset.jpeg",
+    "sunshine.jpeg",
+    "white-cat-cat.jpeg",
+    "white-flower.2.jpeg",
+    "White-flower.jpeg",
+    "White.jpeg"
+];
+---
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<Layout title="Gallery">
+
+    <main class="gallery">
+     
+        <GalleryItem 
+            src="/src/components/THE_IMG.jpeg"
+            alt="Photo 1"
+        />
+       
+        {images.map((image, index) => (
+            <GalleryItem 
+                src={`/src/images/${image}`}
+                alt={`Photo ${index + 1}`}
+            />
+        ))}
+       
+    </main>
+    <ul id="home" class="link-card-grid"><Z
+		href="/"
+		title="Home"
+		body="Go back to the home page"
+		  /></ul>
+  </Layout>
+
+<style>
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        justify-content: center;
+    }
+</style>
+
+<style>
+    .about-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .text-gradient {
+        background-image: var(--accent-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400%;
+        background-position: 0%;
+    }
+</style>
+
+<script>
+    document.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+    });
+</script>
