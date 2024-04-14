@@ -8,13 +8,15 @@ import ele from "../components/1.png";
 import Pic from "../components/pic.astro";
 import cv from "../components/Maaoui Nassim_8.pdf";
 import notet from "../components/notet.png";
+import arduino from "../components/arduino.jpg";
+import anomalie from "../images/main.jpeg";
 
 
 
 const skills = [
   { language: 'Python', rating: 80 },
   { language: 'Java', rating: 60 },
-  { language: 'C++', rating: 75 },
+  { language: 'C', rating: 75 },
   { language: 'C#', rating: 65 },
   { language: '.NET', rating: 70 },
   { language: 'Excel', rating: 85 },
@@ -35,7 +37,7 @@ const skills = [
       />
       <Card
           href="#ui-ux-design" 
-          title="Desktop apps"
+          title="Projects"
           body="Experienced in creating user-centered designs and interactive interfaces."
         />
         <Card
@@ -187,11 +189,10 @@ const skills = [
     }}
 </style>
 
-<Layout title="My Desktop Apps">
+<Layout title="My Projects">
   <main class="des">
     <section id="ui-ux-design">
-    <h1 class="welcome">Check Out <span class="text-gradient">My Desktop Apps</span></h1>
-    <p class="instructions"><strong>Explore</strong> and download my desktop applications</p>
+    <h1 class="welcome">Check Out <span class="text-gradient">My Projects</span></h1>
     <ul role="list" class="link-card-grid">
       <Pic
         href="https://github.com/iborntowin/Project-management"
@@ -216,6 +217,18 @@ const skills = [
         title="App 4"
         body="Sticky notes"
         src={notet}
+      />
+      <Pic
+        href="https://github.com/iborntowin/Board-Ai-detection"
+        title="App 5"
+        body="Machine learning board dectection"
+        src={arduino}
+      />
+      <Pic
+        href="/Machine_learning"
+        title="App 6"
+        body="Machine learning anomaly detection"
+        src={anomalie}
       />
     </ul>   
     <Z

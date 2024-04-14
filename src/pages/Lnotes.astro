@@ -13,11 +13,10 @@ import photo from "../components/notenote.png";
         <h1 class="about-title">Hello,<span class="text-gradient"> Listen to your thoughts  </span>👂</h1>
     
         <p class="about-description"></p>
-        <img class="about-photo" src={photo} alt="Example Photo">
+        <img class="about-photo" src={photo} alt="Example Photo" style="width: 500px; height: auto;">
       </section>
       
       <section class="link-section">
-        <h2 class="section-heading"><span class="text-gradient">Explore More</span></h2>
         <ul class="link-card-grid">
           <Z href="/skills" title="Skills" body="Go back to the skills page" />
         </ul>
@@ -27,7 +26,7 @@ import photo from "../components/notenote.png";
 
 <style>
     .about-photo {
-    width: 100%; /* Make the image fill the container width */
+    width: 100%; 
     height: auto; /* Maintain the aspect ratio */
     max-width: 100%; /* Ensure the image does not exceed its natural size */
     border-radius: 8px; /* Optional: Add border-radius for rounded corners */

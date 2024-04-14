@@ -84,7 +84,7 @@ import Rafraf from '../images/rafraf.jpeg';
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <Layout title="Gallery">
-
+    
     <main class="gallery">
      
         <GalleryItem 
@@ -95,9 +95,9 @@ import Rafraf from '../images/rafraf.jpeg';
                 src={Nouha}
                 alt="Photo 2"
             />
-        <GalleryItem 
-            src={BarchaAbed}
-            alt="Photo 3"
+            <GalleryItem 
+            src={Competition2}
+            alt="Photo 14"
         />
         <GalleryItem 
             src={Bdan}
@@ -108,9 +108,10 @@ import Rafraf from '../images/rafraf.jpeg';
             alt="Photo 5"
         />
         <GalleryItem 
-            src={BigSupport}
-            alt="Photo 6"
-        />
+                src={Hachathon2}
+                alt="Photo 22"
+            />
+        
         <GalleryItem 
             src={Bobo3}
             alt="Photo 7"
@@ -140,9 +141,9 @@ import Rafraf from '../images/rafraf.jpeg';
                 alt="Photo 13"
             />
             <GalleryItem 
-                src={Competition2}
-                alt="Photo 14"
-            />
+            src={BarchaAbed}
+            alt="Photo 3"
+        />
             <GalleryItem 
                 src={Competition}
                 alt="Photo 15"
@@ -172,9 +173,9 @@ import Rafraf from '../images/rafraf.jpeg';
                 alt="Photo 21"
             />
             <GalleryItem 
-                src={Hachathon2}
-                alt="Photo 22"
-            />
+            src={BigSupport}
+            alt="Photo 6"
+        />
             <GalleryItem 
                 src={Hackathon}
                 alt="Photo 23"
@@ -392,6 +393,7 @@ import Rafraf from '../images/rafraf.jpeg';
 
         
     </main>
+    <h1 class="mark">We don't need <span class="text-gradient">Mark</span></h1> 
     <ul id="home" class="link-card-grid"><Z
 		href="/"
 		title="Home"
@@ -400,6 +402,13 @@ import Rafraf from '../images/rafraf.jpeg';
   </Layout>
 
 <style>
+    .mark {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
     .gallery {
         display: flex;
         flex-wrap: wrap;
