@@ -404,6 +404,11 @@ import Rafraf from '../images/rafraf.jpeg';
   </Layout>
 
 <style>
+    @media print {
+    html, body {
+       display: none;  /* hide whole page */
+    }
+}
     .mark {
         font-size: 2.5rem;
         font-weight: 700;
@@ -436,6 +441,7 @@ import Rafraf from '../images/rafraf.jpeg';
         background-size: 400%;
         background-position: 0%;
     }
+    
 </style>
 
 <script>

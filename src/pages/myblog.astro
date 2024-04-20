@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Z from '../components/Z.astro';
+import Blog from '../components/blog.astro';
+import photo from "../components/notenote.png";
+import Lora from '../images/Lora.jpeg';
+import Eeg from '../images/pfa.jpeg';
+import Robot from '../images/robot2.jpeg';
+import ele from "../components/7.png";
+---
+
+
+<Layout title="About Me">
+    <main>
+      <section class="about-section">
+
+        <Blog
+        title='Robot'
+        body="Making all terrain robot for competition"
+        emojy='🤖'
+        src={Robot}
+        alt='robot'
+        status='In Progress'
+        date='2024'
+      />
+
+        <Blog
+        title='PFE'
+        body="Currently working on a long range iot project in my final year"
+        emojy='📝'
+        src={Lora}
+        alt='Lora'
+        status='In Progress'
+        date='2024'
+      />
+
+      <Blog
+        title='Summer project'
+        body='BridgeTrack: Streamlined productivity monitoring powered by C#, Bash, and Microsoft SQL Server for efficient company-wide performance insights.'
+        emojy='☀️'
+        src={ele}
+        alt='eleonetech'
+        status='Completed'
+        date='2023'
+      />
+
+      <Blog
+        title='PFA'
+        body="NeuroVigil is an innovative EEG-based system designed to monitor the brain activity of truck drivers in real-time, ensuring their safety and preventing accidents caused by driver fatigue. By analyzing EEG signals, NeuroVigil can detect signs of drowsiness, distraction, or cognitive impairment, promptly alerting drivers and fleet managers when intervention is needed. This proactive approach enhances road safety, reduces the risk of accidents, and promotes a healthier work environment for truck drivers. "
+        emojy='🧠'
+        src={Eeg}
+        alt='eeg'
+        status='Completed'
+        date='2023'
+      />
+
+
+    
+    
+        <ul id="home" class="link-card-grid"><Z
+            href="/"
+            title="Home"
+            body="Go back to the home page"
+              /></ul>
+      </section>
+      
+      
+    </main>
+  </Layout>
+
+<style>
+   
+  .text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+  main {
+    margin: auto;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .about-section {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .about-description {
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  .link-section {
+    text-align: center;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin: 0 auto;
+  }
+  .about-description-container {
+    border: 2px solid var(--accent);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    font-size: 1.2rem; /* Increase the font size */
+  }
+  @media (max-width: 600px) {
+    .about-title {
+      font-size: 1.5rem;
+    }
+    .about-description {
+      font-size: 1rem;
+    }
+    .section-heading {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .link-card-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+</style>

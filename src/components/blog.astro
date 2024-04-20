@@ -1,0 +1,89 @@
+---
+export interface Props {
+    title: string;
+    body: string;
+    emojy: string;
+    src: string;
+    alt: string;
+    status: string;
+    date: string;
+}
+
+const { body, emojy ,title ,src ,alt ,status ,date } = Astro.props;
+---
+
+<li class="blog-card">
+    <div class="blog-header">
+        <h2 class="blog-title">{title} {emojy}</h2>
+    </div>
+    <div class="blog-content">
+        <div class="blog-text">
+            <p>{body}</p>
+        </div>
+        <div class="blog-image">
+            <img src={src} alt={alt} class="blog-image__img" />
+        </div>
+        
+    </div>
+    <div class="blog-footer"> <!-- Added container for status and date -->
+        <p>{status}------{date}</p>
+        
+    </div>
+</li>
+
+<style>
+    .blog-card {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        list-style: none;
+        display: flex;
+        flex-direction: column; /* Changed flex-direction to column */
+    }
+
+    .blog-header {
+        margin-bottom: 20px; /* Added margin-bottom for spacing */
+    }
+
+    .blog-title {
+        margin: 0;
+        font-size: 24px;
+        color: #333;
+    }
+
+    .blog-content {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* Vertically center content */
+    }
+
+    .blog-text {
+        flex: 1;
+    }
+
+    .blog-text p {
+        font-size: 16px;
+        color: #444;
+    }
+
+    .blog-image {
+        margin-left: 20px;
+    }
+
+    .blog-image__img {
+        max-width: 200px;
+        height: auto;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+    }
+
+    .blog-footer {
+        margin-top: 20px; /* Added margin-top for spacing */
+    }
+</style>
+
+
