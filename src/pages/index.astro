@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
 ---
 
 <Layout title="Welcome to My Portfolio😄">
@@ -121,21 +122,3 @@ import Card from '../components/Card.astro';
 	}
 	
 </style>
-<script>
-// Retrieve current visit count from local storage or initialize it if it doesn't exist
-let visitCount = localStorage.getItem('visitCount');
-if (!visitCount) {
-    visitCount = 0;
-}
-visitCount = parseInt(visitCount);
-
-// Increment visit count
-visitCount++;
-
-// Update visit count on the page
-document.getElementById('visitCount').textContent = visitCount;
-
-// Store updated visit count in local storage
-localStorage.setItem('visitCount', visitCount);
-
-</script>
