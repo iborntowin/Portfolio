@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
 import Z from '../components/Z.astro';
 import Y from '../components/y.astro';
+import GalleryItem from '../components/GalleryItem.astro';
+import theme from '../components/THE_IMG.jpeg';
 
 ---
 
@@ -22,13 +24,10 @@ import Y from '../components/y.astro';
       </div>
     </section>
     <section id="cv"  class="link-section">
-      
-        <Z
-        href="/acces denied"
-        title="My Life  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲 󠁲  󠁲  󠁲  󠁲 󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲  󠁲   󠁲   🖼️"
-        body="sneek peak into my life"
-          />
-  
+          <GalleryItem 
+          src={theme}
+          alt="Photo 1"
+      />
           
     </section>
   </main>
@@ -45,6 +44,11 @@ import Y from '../components/y.astro';
   margin-top: 5rem; /* Adjust as needed */
 }
 
+#cv {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
 
   .about-description-container {
     border: 2px solid var(--accent);
@@ -73,6 +77,7 @@ import Y from '../components/y.astro';
     text-align: center;
 
   }
+  
 
   .about-title {
     font-size: 2.5rem;
