@@ -7,20 +7,46 @@ import Layout from '../layouts/Layout.astro';
     <h1 class="welcome">Welcome to <span class="text-gradient">The terminal</span></h1>
     <section class="terminal-section">
       <div class="terminal">
+        <div class="terminal-header">
+          <div class="terminal-controls">
+            <span class="control close"></span>
+            <span class="control minimize"></span>
+            <span class="control maximize"></span>
+          </div>
+          <div class="terminal-title">portfolio@terminal:~</div>
+        </div>
         <pre class="terminal-output">
           <p id="typed-text" class="typed-text"></p>
         </pre>
-        <input
-          id="user-input"
-          class="user-input"
-          type="text"
-          placeholder="Type a command and press Enter..."
-        />
-      </div>
-      <div class="tooltip" id="tooltip">
-        <div id="tooltip-content" class="tooltip-content">
-          <a id="tooltip-link" class="tooltip-link" href="#">Link</a>
+        <div class="input-container">
+          <span class="prompt-symbol">$</span>
+          <input
+            id="user-input"
+            class="user-input"
+            type="text"
+            placeholder="Type a command and press Enter..."
+            autocomplete="off"
+          />
+          <span id="prediction-text" class="prediction-text"></span>
+          <div id="suggestions" class="suggestions-dropdown"></div>
         </div>
+        <div class="keyboard-hint">
+          <span class="hint-key">Tab</span> to autocomplete • <span class="hint-key">↑↓</span> for history
+        </div>
+      </div>
+      <div class="card-container" id="card-container">
+        <div class="card" id="terminal-card">
+          <a id="tooltip-link" class="card-link" href="#">
+            <div class="card-content">
+              <h3 id="card-title">Visit Link</h3>
+              <p id="card-description">Click to view more details</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="command-history-panel" id="command-history-panel">
+        <h3>Command History</h3>
+        <ul id="history-list" class="history-list"></ul>
       </div>
       
     </section>
@@ -43,8 +69,48 @@ import Layout from '../layouts/Layout.astro';
 		background-size: 400%;
 		background-position: 0%;
 	}
-    .tooltip-link{
-        color: white;
+    .card-container {
+        display: none;
+        margin: 1rem 0;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s ease-in-out;
+        width: 100%;
+        max-width: 500px;
+        margin: 1rem auto;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    #card-title {
+        color: var(--accent-color);
+        margin: 0 0 0.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    #card-description {
+        color: #666;
+        margin: 0;
+        font-size: 0.9rem;
     }
     
   main {
@@ -56,18 +122,98 @@ import Layout from '../layouts/Layout.astro';
   .terminal-section {
     text-align: center;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .terminal {
-    background: white;
-    color: rgb(10, 80, 0);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    font-family: 'Courier New', monospace;
+    background: rgba(255, 255, 255, 0.85);
+    color: #0a5000;
+    border-radius: 1rem;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
     white-space: pre-line;
-    font-size: 1.5rem;
-    border: 2px solid var(--accent-gradient);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    border: 1px solid rgba(120, 196, 117, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(10, 80, 0, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 700px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .terminal:hover {
+    box-shadow: 0px 0px 25px rgba(10, 80, 0, 0.3);
+  }
+
+  .terminal-header {
+    background: rgba(10, 80, 0, 0.9);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(120, 196, 117, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  .terminal-controls {
+    display: flex;
+    gap: 8px;
+  }
+
+  .control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .close {
+    background-color: #ff5f56;
+  }
+
+  .minimize {
+    background-color: #ffbd2e;
+  }
+
+  .maximize {
+    background-color: #27c93f;
+  }
+
+  .terminal-title {
+    color: #ddd;
+    font-size: 0.8rem;
+  }
+
+  .terminal-output {
+    padding: 1.2rem;
+    min-height: 120px;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0;
+    text-align: left;
+    line-height: 1.6;
+    color: #0a5000;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(10, 80, 0, 0.5) transparent;
+  }
+
+  .terminal-output::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .terminal-output::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .terminal-output::-webkit-scrollbar-thumb {
+    background-color: rgba(10, 80, 0, 0.5);
+    border-radius: 4px;
+    border: 2px solid transparent;
   }
 
   .prompt {
@@ -76,34 +222,210 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .typed-text {
-    text-align: center; /* Center-align the typed text */
+    text-align: left;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .input-container {
+    position: relative;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0 1rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .prompt-symbol {
+    color: #0a5000;
+    margin-right: 0.5rem;
+    font-weight: bold;
   }
 
   .user-input {
     background: transparent;
     border: none;
-    color: var(--accent-color);
-    font-family: 'Courier New', monospace;
-    font-size: 1.5rem;
+    color: #0a5000;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 1.2rem;
     width: 100%;
     outline: none;
-    margin-top: 0.5rem;
-    height: 10rem;  }
-    @media screen and (max-width: 768px) {
+    position: relative;
+    z-index: 2;
+    caret-color: #0a5000;
+    padding: 0.5rem 0;
+    transition: all 0.2s ease;
+  }
+
+  .user-input:focus {
+    background: rgba(120, 196, 117, 0.1);
+    border-radius: 4px;
+  }
+
+  .prediction-text {
+    display: none;
+  }
+
+  .suggestions-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 1.8rem;
+    width: calc(100% - 2rem);
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(120, 196, 117, 0.3);
+    border-radius: 8px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(10, 80, 0, 0.1);
+  }
+
+  .suggestions-dropdown.active {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .suggestion-item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    color: #333;
+  }
+
+  .suggestion-item:hover, .suggestion-item.selected {
+    background: rgba(10, 80, 0, 0.1);
+    color: #0a5000;
+  }
+
+  .keyboard-hint {
+    font-size: 0.8rem;
+    color: #555;
+    padding: 0.5rem;
+    text-align: center;
+    border-top: 1px solid #78C475;
+  }
+
+  .hint-key {
+    background: rgba(10, 80, 0, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #0a5000;
+    font-family: monospace;
+    margin: 0 2px;
+  }
+
+  .command-history-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    box-shadow: 0 12px 32px rgba(10, 80, 0, 0.15);
+    border: 1px solid rgba(120, 196, 117, 0.4);
+    display: block;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.95;
+  }
+
+  .command-history-panel h3 {
+    color: #0a5000;
+    margin-top: 0;
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #78C475;
+    padding-bottom: 0.5rem;
+  }
+
+  .history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
+  .history-item {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(10, 80, 0, 0.1);
+    color: #0a5000;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .history-item::before {
+    content: '$';
+    margin-right: 8px;
+    color: #0a5000;
+    opacity: 0.7;
+    font-weight: bold;
+  }
+
+  .history-item:hover {
+    background: rgba(10, 80, 0, 0.1);
+    color: #0a5000;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(10, 80, 0, 0.08);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(10, 80, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(10, 80, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(10, 80, 0, 0); }
+  }
+
+  .pulse {
+    animation: pulse 1.5s infinite;
+  }
+
+  .command-executed {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @media screen and (max-width: 768px) {
     main {
       padding: 1rem;
     }
 
     .terminal {
-      padding: 1rem;
       font-size: 1rem;
-      border: 1px solid var(--accent-gradient);
+    }
+
+    .user-input, .prediction-text {
+      font-size: 1rem;
     }
 
     /* Adjust terminal text overflow */
     .terminal-output {
       overflow: auto;
       max-height: 150px; /* Limit the height to prevent overflow */
+    }
+
+    .keyboard-hint {
+      font-size: 0.7rem;
     }
   }
 </style>
@@ -114,56 +436,386 @@ import Layout from '../layouts/Layout.astro';
 <script>
     const typedTextElement = document.getElementById('typed-text');
     const userInputElement = document.getElementById('user-input');
-    const tooltip = document.getElementById('tooltip');
-    const tooltipContent = document.getElementById('tooltip-content');
+    const predictionTextElement = document.getElementById('prediction-text');
+    const suggestionsDropdown = document.getElementById('suggestions');
+    const historyPanel = document.getElementById('command-history-panel');
+    const historyList = document.getElementById('history-list');
     const tooltipLink = document.getElementById('tooltip-link');
   
     const responses = {
-      help: "Available commands: \n- help\n- about\n- skills\n- contact\n- home",
+      help: "Available commands: \n- help\n- about\n- skills\n- contact\n- home\n- blog\n",
       about: "I craft innovative and user-friendly desktop applications..",
       skills: "I'm proficient in a wide range of skills including...",
       contact: "You can reach out to me at nassim28maaoui@gmail.com",
       home: "Welcome to my portfolio website! \n Type 'help' for a list of commands.",
+      secret: "You found the secret! 🎉 Type 'mylife' to explore my personal journey.",
+      mylife: "Welcome to my personal journey! 🌟",
+      blog: "Welcome to my blog! Check out my latest projects and updates."
     };
-  
-  // Focus the input field when the page loads
-  window.onload = function() {
-    userInputElement.focus();
-  };
 
-    function displayResponse(command) {
-  const response = responses[command] || "Command not found. Try 'help' for a list of commands.";
-  typedTextElement.textContent = `$${command}\n${response}`;
+    // Command history array
+    let commandHistory = [];
+    let historyIndex = -1;
+    let currentInput = '';
+    let selectedSuggestionIndex = -1;
+    
+    // Focus the input field when the page loads and maintain focus
+    window.onload = function() {
+      userInputElement.focus();
+      // Display welcome message
+      typedTextElement.textContent = "Welcome to the terminal! Type 'help' to see available commands.";
+      // Load command history from localStorage if available
+      const savedHistory = localStorage.getItem('terminalHistory');
+      if (savedHistory) {
+        commandHistory = JSON.parse(savedHistory);
+        updateHistoryPanel();
+      }
+    };
 
-  // Check if command corresponds to a link
- // Check if command corresponds to a link
-const linkCommands = ['about', 'skills', 'contact'];
-if (linkCommands.includes(command)) {
-  tooltipLink.textContent = `Visit ${command}`;
-  tooltipLink.href = new URL(`/${command}`, window.location.href).toString();
-  tooltipLink.style.color = "black"; // Set the color to black
-  tooltip.style.display = 'block';
-} else if (command === "home") {
-  tooltipLink.textContent = `Visit ${command}`;
-  tooltipLink.href = new URL("/", window.location.href).toString();
-  tooltipLink.style.color = "black"; // Set the color to black
-  tooltip.style.display = 'block';
-} else {
-  tooltipLink.style.color = ''; // Reset the color
-  tooltip.style.display = 'none';
-}
-    }
-  userInputElement.addEventListener('keyup', (event) => {
-      if (event.key === 'Enter') {
-        const command = userInputElement.value.trim().toLowerCase();
-        displayResponse(command);
-        userInputElement.value = '';
+    // Keep focus on input field when clicking anywhere on the page
+    document.addEventListener('click', function() {
+      userInputElement.focus();
+    });
+
+    // Prevent focus loss when clicking on other elements
+    document.addEventListener('mousedown', function(e) {
+      if (e.target !== userInputElement) {
+        e.preventDefault();
+        userInputElement.focus();
       }
     });
-  
+
+    function displayResponse(command) {
+      if (!command) return;
+      
+      // Add command to history if it's not empty and not a duplicate of the last command
+      if (command && (commandHistory.length === 0 || commandHistory[0] !== command)) {
+        commandHistory.unshift(command);
+        // Limit history to 10 items
+        if (commandHistory.length > 10) {
+          commandHistory.pop();
+        }
+        // Save to localStorage
+        localStorage.setItem('terminalHistory', JSON.stringify(commandHistory));
+        updateHistoryPanel();
+      }
+      
+      const response = responses[command] || "Command not found. Try 'help' for a list of commands.";
+      
+      // Add animation class
+      typedTextElement.classList.remove('command-executed');
+      void typedTextElement.offsetWidth; // Trigger reflow
+      typedTextElement.classList.add('command-executed');
+      
+      typedTextElement.textContent = `$${command}\n${response}`;
+
+      // Check if command corresponds to a link
+      const linkCommands = ['about', 'skills', 'contact', 'mylife', 'blog'];
+      if (linkCommands.includes(command)) {
+        const cardTitle = command === 'mylife' ? 'My Personal Journey' : `Visit ${command}`;
+        const cardDescription = command === 'mylife' ? 'Discover my personal story and journey' : `Click to view more details about ${command}`;
+        document.getElementById('card-title').textContent = cardTitle;
+        document.getElementById('card-description').textContent = cardDescription;
+        tooltipLink.href = new URL(`/${command}`, window.location.href).toString();
+        document.getElementById('card-container').style.display = 'block';
+        
+        // Add pulse animation to card
+        const card = document.getElementById('terminal-card');
+        card.classList.add('pulse');
+        setTimeout(() => card.classList.remove('pulse'), 2000);
+      } else if (command === "home") {
+        document.getElementById('card-title').textContent = 'Visit Home';
+        document.getElementById('card-description').textContent = 'Click to return to the homepage';
+        tooltipLink.href = new URL("/", window.location.href).toString();
+        document.getElementById('card-container').style.display = 'block';
+      } else {
+        document.getElementById('card-container').style.display = 'none';
+      }
+      
+      // Reset history navigation
+      historyIndex = -1;
+    }
+    
+    // Function to predict command based on input
+    function predictCommand(input) {
+      if (!input) return '';
+      
+      input = input.toLowerCase();
+      const availableCommands = Object.keys(responses);
+      
+      // Find commands that start with the input
+      const matchingCommands = availableCommands.filter(cmd => cmd.startsWith(input));
+      
+      if (matchingCommands.length > 0) {
+        // Return the first matching command
+        return matchingCommands[0].substring(input.length);
+      }
+      
+      return '';
+    }
+    
+    // Function to show suggestions dropdown
+    function showSuggestions(input) {
+      if (!input) {
+        suggestionsDropdown.innerHTML = '';
+        suggestionsDropdown.classList.remove('active');
+        return;
+      }
+      
+      input = input.toLowerCase();
+      const availableCommands = Object.keys(responses);
+      
+      // Find commands that include the input
+      const matchingCommands = availableCommands.filter(cmd => cmd.includes(input));
+      
+      if (matchingCommands.length > 0) {
+        suggestionsDropdown.innerHTML = '';
+        matchingCommands.forEach((cmd, index) => {
+          const item = document.createElement('div');
+          item.classList.add('suggestion-item');
+          item.textContent = cmd;
+          item.addEventListener('click', () => {
+            userInputElement.value = cmd;
+            suggestionsDropdown.innerHTML = '';
+            suggestionsDropdown.classList.remove('active');
+            userInputElement.focus();
+          });
+          suggestionsDropdown.appendChild(item);
+        });
+        suggestionsDropdown.classList.add('active');
+        selectedSuggestionIndex = -1;
+      } else {
+        suggestionsDropdown.innerHTML = '';
+        suggestionsDropdown.classList.remove('active');
+      }
+    }
+    
+    // Function to update history panel
+    function updateHistoryPanel() {
+      historyList.innerHTML = '';
+      if (commandHistory.length > 0) {
+        historyPanel.style.display = 'block';
+        commandHistory.forEach((cmd, index) => {
+          const item = document.createElement('li');
+          item.classList.add('history-item');
+          item.textContent = cmd;
+          item.addEventListener('click', () => {
+            userInputElement.value = cmd;
+            userInputElement.focus();
+            // Position cursor at the end
+            userInputElement.selectionStart = userInputElement.value.length;
+            userInputElement.selectionEnd = userInputElement.value.length;
+          });
+          historyList.appendChild(item);
+        });
+      } else {
+        historyPanel.style.display = 'none';
+      }
+    }
+
+    // Update prediction and suggestions as user types
+    userInputElement.addEventListener('input', () => {
+      const userInput = userInputElement.value.trim();
+      
+      // Remove inline prediction
+      predictionTextElement.textContent = '';
+      
+      // Update suggestions dropdown
+      showSuggestions(userInput);
+    });
+    
+    // Helper function to calculate text width
+    function getTextWidth(text, font) {
+      // Create a canvas element for measuring text
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      context.font = font;
+      const metrics = context.measureText(text);
+      return metrics.width;
+    }
+
+    // Handle keyboard navigation
+    userInputElement.addEventListener('keydown', (event) => {
+      const suggestions = suggestionsDropdown.querySelectorAll('.suggestion-item');
+      
+      // Tab key to complete prediction or select suggestion
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        
+        // If there's an active suggestion selected
+        if (selectedSuggestionIndex !== -1 && suggestionsDropdown.classList.contains('active')) {
+          const selectedSuggestion = suggestions[selectedSuggestionIndex].textContent;
+          userInputElement.value = selectedSuggestion;
+          suggestionsDropdown.innerHTML = '';
+          suggestionsDropdown.classList.remove('active');
+          selectedSuggestionIndex = -1;
+        }
+        // If there's a prediction
+        else if (predictionTextElement.textContent) {
+          userInputElement.value = predictionTextElement.textContent;
+          predictionTextElement.textContent = '';
+        }
+        // If there are suggestions but none selected, select the first one
+        else if (suggestions.length > 0) {
+          selectedSuggestionIndex = 0;
+          suggestions[0].classList.add('selected');
+          userInputElement.value = suggestions[0].textContent;
+          suggestionsDropdown.innerHTML = '';
+          suggestionsDropdown.classList.remove('active');
+        }
+        
+        // Position cursor at the end
+        userInputElement.selectionStart = userInputElement.value.length;
+        userInputElement.selectionEnd = userInputElement.value.length;
+      }
+      
+      // Up/Down arrows for history navigation
+      else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        
+        // If suggestions are visible, navigate through them
+        if (suggestionsDropdown.classList.contains('active') && suggestions.length > 0) {
+          if (selectedSuggestionIndex > 0) {
+            selectedSuggestionIndex--;
+          } else {
+            selectedSuggestionIndex = suggestions.length - 1;
+          }
+          
+          suggestions.forEach((item, index) => {
+            if (index === selectedSuggestionIndex) {
+              item.classList.add('selected');
+            } else {
+              item.classList.remove('selected');
+            }
+          });
+          
+          return;
+        }
+        
+        // Otherwise navigate through history
+        if (historyIndex === -1) {
+          // Save current input before navigating history
+          currentInput = userInputElement.value;
+        }
+        
+        if (historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          userInputElement.value = commandHistory[historyIndex];
+          // Position cursor at the end
+          userInputElement.selectionStart = userInputElement.value.length;
+          userInputElement.selectionEnd = userInputElement.value.length;
+        }
+      }
+      
+      else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        
+        // If suggestions are visible, navigate through them
+        if (suggestionsDropdown.classList.contains('active') && suggestions.length > 0) {
+          if (selectedSuggestionIndex < suggestions.length - 1) {
+            selectedSuggestionIndex++;
+          } else {
+            selectedSuggestionIndex = 0;
+          }
+          
+          suggestions.forEach((item, index) => {
+            if (index === selectedSuggestionIndex) {
+              item.classList.add('selected');
+            } else {
+              item.classList.remove('selected');
+            }
+          });
+          
+          return;
+        }
+        
+        // Otherwise navigate through history
+        if (historyIndex > 0) {
+          historyIndex--;
+          userInputElement.value = commandHistory[historyIndex];
+        } else if (historyIndex === 0) {
+          historyIndex = -1;
+          userInputElement.value = currentInput;
+        }
+        // Position cursor at the end
+        userInputElement.selectionStart = userInputElement.value.length;
+        userInputElement.selectionEnd = userInputElement.value.length;
+      }
+      
+      // Enter key to select suggestion or execute command
+      else if (event.key === 'Enter') {
+        if (selectedSuggestionIndex !== -1 && suggestionsDropdown.classList.contains('active')) {
+          event.preventDefault();
+          const selectedSuggestion = suggestions[selectedSuggestionIndex].textContent;
+          userInputElement.value = selectedSuggestion;
+          suggestionsDropdown.innerHTML = '';
+          suggestionsDropdown.classList.remove('active');
+          selectedSuggestionIndex = -1;
+          // Position cursor at the end
+          userInputElement.selectionStart = userInputElement.value.length;
+          userInputElement.selectionEnd = userInputElement.value.length;
+        } else {
+          const command = userInputElement.value.trim().toLowerCase();
+          displayResponse(command);
+          userInputElement.value = '';
+          predictionTextElement.textContent = '';
+          suggestionsDropdown.innerHTML = '';
+          suggestionsDropdown.classList.remove('active');
+        }
+      }
+      
+      // Escape key to close suggestions
+      else if (event.key === 'Escape') {
+        suggestionsDropdown.innerHTML = '';
+        suggestionsDropdown.classList.remove('active');
+        selectedSuggestionIndex = -1;
+      }
+    });
+
+    // We don't need a separate keyup event listener for Enter key
+    // as it's already handled in the keydown event listener above
+
+    // Clear prediction when input is cleared or on blur
+    userInputElement.addEventListener('blur', () => {
+      // Small delay to allow for suggestion clicks
+      setTimeout(() => {
+        predictionTextElement.textContent = '';
+        // Don't close suggestions immediately to allow for clicks
+        // suggestionsDropdown.classList.remove('active');
+      }, 200);
+    });
+
+    // Refocus input when clicking anywhere in the terminal
+    document.querySelector('.terminal').addEventListener('click', (event) => {
+      // Don't refocus if clicking on a suggestion or history item
+      if (!event.target.closest('.suggestion-item') && !event.target.closest('.history-item')) {
+        userInputElement.focus();
+      }
+    });
+    
+    // Terminal controls functionality (just for visual effect)
+    document.querySelector('.close').addEventListener('click', () => {
+      window.location.href = '/';
+    });
+    
+    document.querySelector('.minimize').addEventListener('click', () => {
+      const terminal = document.querySelector('.terminal');
+      terminal.style.opacity = '0.5';
+      setTimeout(() => {
+        terminal.style.opacity = '1';
+      }, 1000);
+    });
+    
+    document.querySelector('.maximize').addEventListener('click', () => {
+      const terminal = document.querySelector('.terminal');
+      terminal.classList.toggle('maximized');
+    });
+    
+    // Handle tooltip link click
     tooltipLink.addEventListener('click', () => {
-      // Hide tooltip after clicking
-      tooltip.style.display = 'none';
+      // Add transition effect before navigating
+      document.querySelector('.terminal').style.transform = 'scale(0.95)';
+      document.querySelector('.terminal').style.opacity = '0.8';
     });
   </script>
   

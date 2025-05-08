@@ -1,0 +1,699 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Z from '../components/Z.astro';
+import GalleryItem from '../components/GalleryItem.astro';
+import photo from "../images/Golden.png";
+import photo1 from "../images/Golden1.png";
+import photo2 from "../images/Golden2.png";
+import photo3 from "../images/Golden3.png";
+import photo4 from "../images/Golden4.png";
+import photo5 from "../images/Golden5.png";
+import photo6 from "../images/Golden6.png";
+
+
+// Add AOS library for smooth animations
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+
+---
+
+<script>
+  // Initialize AOS
+  import AOS from 'aos';
+  document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  });
+</script>
+
+<Layout title="Golden Touch">
+    <main>
+      <section class="about-section">
+        <h1 class="about-title">Golden<span class="text-gradient"> Touch </span>✨</h1>
+        <div class="about-description-container">
+          <p class="about-description">
+            An innovative event management system powered by AI, seamlessly integrated with Telegram for enhanced user interaction and automated responses.
+          </p>
+        </div>
+        <img class="about-photo" src={photo} alt="Golden Touch Project" style="width: 500px; height: auto;">
+      </section>
+      
+      <section class="features-section">
+        <h2 class="section-heading">Key Features</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>AI-Powered Responses</h3>
+            <p>Intelligent automated responses for quick and accurate event information</p>
+          </div>
+          <div class="feature-card">
+            <h3>Telegram Integration</h3>
+            <p>Seamless communication through Telegram bot interface</p>
+          </div>
+          <div class="feature-card">
+            <h3>Event Management</h3>
+            <p>Comprehensive system for organizing and tracking events</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section" data-aos="fade-up">
+        <h2 class="section-heading" data-aos="zoom-in">Project Gallery</h2>
+        <div class="gallery-controls">
+          <button class="gallery-control" data-view="masonry" onclick="switchView('masonry')">Grid View</button>
+          <button class="gallery-control" data-view="carousel" onclick="switchView('carousel')">Carousel View</button>
+        </div>
+        
+        <div class="gallery-masonry" id="gallery-container">
+          {[photo1, photo2, photo3, photo4, photo5, photo6].map((image, index) => (
+            <div class="gallery-item" onclick="openLightbox(this)" data-aos="fade-up" data-aos-delay={index * 100}>
+              <div class="image-wrapper">
+                <img src={image} alt={`Golden Touch Project Image ${index + 1}`} loading="lazy" />
+                <div class="overlay">
+                  <h3>{[
+                    "User Interface",
+                    "Event Management",
+                    "AI Integration",
+                    "Telegram Bot",
+                    "Analytics Dashboard",
+                    "Mobile Experience"
+                  ][index]}</h3>
+                  <p>{[
+                    "Main dashboard view with intuitive controls and real-time updates",
+                    "Streamlined event creation with customizable templates",
+                    "Advanced AI-powered response system with natural language processing",
+                    "Seamless integration with instant notifications and updates",
+                    "Comprehensive analytics with interactive charts and insights",
+                    "Fully responsive design optimized for all devices"
+                  ][index]}</p>
+                  <span class="view-details">Click to explore</span>
+                </div>
+              </div>
+            </div>
+          ))}
+          </div>
+        </div>
+
+        <div id="lightbox" class="lightbox">
+          <div class="lightbox-content">
+            <button class="nav-btn prev-btn" onclick="navigateImage(-1)">❮</button>
+            <button class="nav-btn next-btn" onclick="navigateImage(1)">❯</button>
+            <span class="close-btn" onclick="closeLightbox()">&times;</span>
+            <img id="lightbox-img" src="" alt="Lightbox image" />
+            <div class="lightbox-caption"></div>
+            <div class="lightbox-counter"></div>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        let currentView = 'masonry';
+        let currentImageIndex = 0;
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        function switchView(view) {
+          const container = document.getElementById('gallery-container');
+          const galleryControls = document.querySelectorAll('.gallery-control');
+          currentView = view;
+          
+          // Update active state of control buttons
+          galleryControls.forEach(control => {
+            control.classList.toggle('active', control.dataset.view === view);
+          });
+          
+          if (view === 'carousel') {
+            // First, remove all existing styles
+            container.removeAttribute('style');
+            container.className = 'gallery-carousel';
+            
+            // Apply carousel-specific styles
+            Object.assign(container.style, {
+              display: 'flex',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              scrollBehavior: 'smooth',
+              WebkitOverflowScrolling: 'touch',
+              msOverflowStyle: 'none',
+              scrollbarWidth: 'none',
+              gap: '3rem',
+              padding: '3rem 1rem',
+              alignItems: 'center',
+              minHeight: '600px',
+              width: '100%',
+              position: 'relative',
+              margin: '0 auto',
+              maxWidth: '1400px',
+              background: 'rgba(var(--accent-light), 0.05)',
+              borderRadius: '16px'
+            });
+            
+            // Update all gallery items for carousel view
+            Array.from(container.children).forEach((item, index) => {
+              // Remove existing styles
+              item.removeAttribute('style');
+              
+              // Apply new styles
+              Object.assign(item.style, {
+                flex: '0 0 70%',
+                minWidth: '400px',
+                maxWidth: '800px',
+                height: 'auto',
+                margin: '0 1.5rem',
+                scrollSnapAlign: 'center',
+                transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                transform: 'scale(0.92)',
+                opacity: '0.6',
+                position: 'relative',
+                cursor: 'pointer',
+                borderRadius: '16px',
+                boxShadow: '0 8px 25px rgba(var(--accent-light), 0.15)'}]}}}}
+              });
+
+              // Set up hover effects
+              item.onmouseenter = () => {
+                Object.assign(item.style, {
+                  transform: 'scale(1.05)',
+                  opacity: '1',
+                  zIndex: '2',
+                  boxShadow: '0 12px 30px rgba(var(--accent-light), 0.25)'
+                });
+              };
+              
+              item.onmouseleave = () => {
+                Object.assign(item.style, {
+                  transform: 'scale(0.95)',
+                  opacity: '0.7',
+                  zIndex: '1',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)'
+                });
+              };
+
+              // Maintain lightbox functionality
+              item.onclick = () => openLightbox(item);
+            });
+          } else {
+            // Reset to masonry view
+            container.removeAttribute('style');
+            container.className = 'gallery-masonry';
+            
+            // Apply masonry-specific styles
+            Object.assign(container.style, {
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gap: '2rem',
+              padding: '1rem',
+              overflow: 'visible'
+            });
+            
+            // Reset all items to default state
+            Array.from(container.children).forEach(item => {
+              item.removeAttribute('style');
+              item.style.opacity = '1';
+              item.style.transition = 'all 0.3s ease';
+              
+              // Remove carousel-specific event listeners
+              item.onmouseenter = null;
+              item.onmouseleave = null;
+              // Maintain lightbox functionality
+              item.onclick = () => openLightbox(item);
+            });
+          }
+        }
+
+        function openLightbox(element) {
+          const lightbox = document.getElementById('lightbox');
+          const lightboxImg = document.getElementById('lightbox-img');
+          const img = element.querySelector('img');
+          const caption = element.querySelector('.overlay').innerHTML;
+          
+          currentImageIndex = Array.from(galleryItems).indexOf(element);
+          updateLightboxContent();
+          
+          lightbox.classList.add('active');
+          lightbox.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightboxContent() {
+          const lightboxImg = document.getElementById('lightbox-img');
+          const currentItem = galleryItems[currentImageIndex];
+          const img = currentItem.querySelector('img');
+          const caption = currentItem.querySelector('.overlay').innerHTML;
+          
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          document.querySelector('.lightbox-caption').innerHTML = caption;
+          document.querySelector('.lightbox-counter').textContent = `${currentImageIndex + 1} / ${galleryItems.length}`;
+        }
+
+        function navigateImage(direction) {
+          currentImageIndex = (currentImageIndex + direction + galleryItems.length) % galleryItems.length;
+          updateLightboxContent();
+        }
+
+        function closeLightbox() {
+          const lightbox = document.getElementById('lightbox');
+          lightbox.classList.remove('active');
+          setTimeout(() => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }, 300);
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+          if (document.getElementById('lightbox').style.display === 'flex') {
+            switch(e.key) {
+              case 'Escape': closeLightbox(); break;
+              case 'ArrowLeft': navigateImage(-1); break;
+              case 'ArrowRight': navigateImage(1); break;
+            }
+          }
+        });
+
+        // Touch Navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.getElementById('lightbox').addEventListener('touchstart', e => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('lightbox').addEventListener('touchend', e => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 50) navigateImage(1);
+          if (touchEndX - touchStartX > 50) navigateImage(-1);
+        });
+
+        // Initialize AOS and gallery functionality
+        document.addEventListener('DOMContentLoaded', () => {
+          AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+          });
+
+          // Ensure images are loaded before initializing gallery
+          const galleryImages = document.querySelectorAll('.gallery-item img');
+          Promise.all(Array.from(galleryImages).map(img => {
+            if (img.complete) return Promise.resolve();
+            return new Promise(resolve => {
+              img.onload = resolve;
+              img.onerror = resolve;
+            });
+          })).then(() => {
+            // Initialize gallery after images are loaded
+            document.querySelectorAll('.gallery-item').forEach(item => {
+              item.style.opacity = '1';
+            });
+          });
+        });
+      </script>
+
+      <section class="link-section">
+        <ul class="link-card-grid">
+          <Z href="/skills" title="Skills" body="Go back to the skills page" />
+        </ul>
+      </section>
+    </main>
+  </Layout>
+
+<style>
+  .about-photo {
+    width: 100%; 
+    height: auto;
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 2rem 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  main {
+    margin: auto;
+    padding: 2rem;
+    max-width: 800px;
+  }
+
+  .about-section {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .about-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .about-description {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .about-description-container {
+    border: 2px solid var(--accent);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 600px;
+  }
+
+  .features-section {
+    margin: 4rem 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .feature-card {
+    background: rgba(var(--accent-light), 0.1);
+    border-radius: 0.6rem;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-card h3 {
+    color: rgb(var(--accent-light));
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card p {
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: rgb(var(--accent-light));
+  }
+
+  .link-section {
+    text-align: center;
+  }
+
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 0;
+    list-style: none;
+    margin: 0 auto;
+  }
+
+  .gallery-section {
+    margin: 4rem 0;
+    position: relative;
+  }
+
+  .gallery-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-control {
+    background: rgba(var(--accent-light), 0.1);
+    border: 2px solid rgb(var(--accent-light));
+    color: rgb(var(--accent-light));
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .gallery-control:hover {
+    background: rgb(var(--accent-light));
+    color: white;
+  }
+
+  .gallery-masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    transition: all 0.5s ease;
+  }
+
+  .gallery-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    align-items: center;
+    min-height: 500px;
+    width: 100%;
+    position: relative;
+  }
+
+  .gallery-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.15);
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+  .gallery-item:hover .overlay {
+    opacity: 1;
+  }
+
+  .overlay h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.1s;
+  }
+
+  .overlay p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.9;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.2s;
+  }
+
+  .view-details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: rgb(var(--accent-light));
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.3s;
+  }
+
+  .gallery-item:hover .overlay h3,
+  .gallery-item:hover .overlay p,
+  .gallery-item:hover .overlay .view-details {
+    transform: translateY(0);
+  }
+
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+  }
+
+  .lightbox-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    object-fit: contain;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+
+  .lightbox.active img {
+    transform: scale(1);
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .prev-btn {
+    left: 2rem;
+  }
+
+  .next-btn {
+    right: 2rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .close-btn:hover {
+    transform: rotate(90deg);
+  }
+
+  .lightbox-caption {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    text-align: center;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    color: white;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 600px) {
+    .gallery-masonry {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+
+    .overlay h3 {
+      font-size: 1rem;
+    }
+
+    .overlay p {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-title {
+      font-size: 1.8rem;
+    }
+    .about-description {
+      font-size: 1rem;
+    }
+    .section-heading {
+      font-size: 1.5rem;
+    }
+    .feature-card {
+      padding: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+    }
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .gallery-item img {
+      height: 150px;
+    }
+  }
+</style>

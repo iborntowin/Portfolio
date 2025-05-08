@@ -8,14 +8,26 @@ import Lora from '../images/Lora.jpeg';
 import Eeg from '../images/pfa.jpeg';
 import Robot from '../images/robot2.jpeg';
 import ele from "../components/7.png";
+import Event from "../images/event.jpeg";
+import Mobile from "../images/mobile.jpeg";
+import Golden from "../images/Golden.png";
 ---
 
-
 <Layout title="About Me">
-    <main>
-      <section class="about-section">
+  <main>
+    <section class="about-section">
 
-        <Blog
+      <Blog
+        title='GoldenTouch'
+        body="Developing a cross-platform event management system with AI features, Telegram API alerts, and pack customization for clients."
+        emojy='🎉'
+        src={Golden}
+        alt='event management'
+        status='In Progress'
+        date='2025'
+      />
+
+      <Blog
         title='Robot'
         body="Making all terrain robot for competition"
         emojy='🤖'
@@ -25,9 +37,9 @@ import ele from "../components/7.png";
         date='2024'
       />
 
-        <Blog
+      <Blog
         title='PFE'
-        body="Currently working on a long range iot project in my final year"
+        body="Currently working on a long-range IoT project involving LoRa and ESP32 for real-time environmental monitoring."
         emojy='📝'
         src={Lora}
         alt='Lora'
@@ -35,6 +47,10 @@ import ele from "../components/7.png";
         date='2024'
       />
 
+      
+
+     
+      
       <Blog
         title='Summer project'
         body='BridgeTrack: Streamlined productivity monitoring powered by C#, Bash, and Microsoft SQL Server for efficient company-wide performance insights.'
@@ -47,7 +63,7 @@ import ele from "../components/7.png";
 
       <Blog
         title='PFA'
-        body="NeuroVigil is an innovative EEG-based system designed to monitor the brain activity of truck drivers in real-time, ensuring their safety and preventing accidents caused by driver fatigue. By analyzing EEG signals, NeuroVigil can detect signs of drowsiness, distraction, or cognitive impairment, promptly alerting drivers and fleet managers when intervention is needed. This proactive approach enhances road safety, reduces the risk of accidents, and promotes a healthier work environment for truck drivers. "
+        body="NeuroVigil is an innovative EEG-based system designed to monitor truck drivers' brain activity and prevent fatigue-related accidents."
         emojy='🧠'
         src={Eeg}
         alt='eeg'
@@ -55,19 +71,17 @@ import ele from "../components/7.png";
         date='2023'
       />
 
+      <ul id="home" class="link-card-grid">
+        <Z
+          href="/skills"
+          title="Skills"
+          body="Go back to the skills page"
+        />
+      </ul>
+    </section>
+  </main>
+</Layout>
 
-    
-    
-        <ul id="home" class="link-card-grid"><Z
-            href="/skills"
-            title="Skills"
-            body="Go back to the skills page"
-              /></ul>
-      </section>
-      
-      
-    </main>
-  </Layout>
 
 <style>
    
